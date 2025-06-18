@@ -6,10 +6,21 @@ function App() {
 	const [role, setRole] = useState<Role | null>(null);
 
 	useEffect(() => {
+		// если нет Telegram.WebApp — прекращаем
+		if (!(window as any).Telegram?.WebApp) {
+			console.warn('Запустите приложение из Telegram');
+			return;
+		}
+
 		const tg = (window as any).Telegram.WebApp;
 		tg.ready();
 
-		const { id: userId } = tg.initDataUnsafe.user;
+		const user = tg.initDataUnsafe.user;
+		const userId = user?.id;
+		if (!userId) {
+			console.error('Не удалось получить id пользователя');
+			return;
+		}
 
 		fetch(`${import.meta.env.VITE_API_URL}/api/user-role`, {
 			method: 'POST',
@@ -17,7 +28,7 @@ function App() {
 			body: JSON.stringify({ userId }),
 		})
 			.then((res) => res.json())
-			.then((data) => setRole(data.role))
+			.then((data) => setRole(data.role as Role))
 			.catch(() => setRole('USER'));
 	}, []);
 
