@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-
-const tg = window.Telegram.WebApp;
+import { useTelegram } from './hooks/useTelegram';
 
 function App() {
+	const { tg, user } = useTelegram();
+
 	useEffect(() => {
 		tg.ready();
 		tg.expand();
@@ -13,7 +14,6 @@ function App() {
 	};
 
 	const ADMIN_ID = 6842203850;
-	const user = tg.initDataUnsafe.user;
 	const isAdmin = user?.id === ADMIN_ID;
 
 	return (
