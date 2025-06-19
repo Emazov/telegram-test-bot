@@ -17,13 +17,8 @@ function App() {
 		tg.expand();
 	}, []);
 
-	const API_URL = 'https://telegram-bot-test-server.onrender.com/api/get-role';
-
-	// res.json({
-	// 	id: userInDb?.id,
-	// 	telegramId: userInDb?.telegramId,
-	// 	role: userInDb?.role,
-	// });
+	// const API_URL = 'https://telegram-bot-test-server.onrender.com/api/get-role';
+	const API_URL = 'http://localhost:7001/api/get-role';
 
 	// Отправляем его на бэкенд
 	fetch(API_URL, {
