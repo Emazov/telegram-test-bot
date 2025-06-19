@@ -36,6 +36,7 @@ function App() {
 				{user?.username}
 				{user?.first_name}
 			</div>
+			<div>{initData}</div>
 		</div>
 	);
 }
