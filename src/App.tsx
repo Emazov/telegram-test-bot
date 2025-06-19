@@ -6,7 +6,8 @@ function App() {
 
 	useEffect(() => {
 		tg.ready();
-		tg.expand();
+		// tg.expand();
+		tg.requestFullscreen();
 	}, []);
 
 	const onClose = () => {

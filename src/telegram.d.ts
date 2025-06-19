@@ -41,6 +41,7 @@ interface TelegramWebApp {
 		};
 		close(): void;
 		expand(): void;
+		requestFullscreen(): void;
 		setBackgroundColor(color: string): void;
 		enableClosingConfirmation(): void;
 		disableClosingConfirmation(): void;
