@@ -4,7 +4,7 @@ import { useTelegram } from './hooks/useTelegram';
 type Role = 'ADMIN' | 'USER';
 
 function App() {
-	const { tg, initData } = useTelegram();
+	const { tg, initData, user } = useTelegram();
 	const [role, setRole] = useState<Role | null>(null);
 
 	useEffect(() => {
@@ -31,6 +31,11 @@ function App() {
 			<h1>
 				Вы — {role === 'ADMIN' ? 'администратор' : 'обычный пользователь'}
 			</h1>
+			<div>
+				{user?.id}
+				{user?.username}
+				{user?.first_name}
+			</div>
 		</div>
 	);
 }
