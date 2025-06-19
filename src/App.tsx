@@ -7,10 +7,6 @@ function App() {
 	const { tg, initData, user } = useTelegram();
 	const [role, setRole] = useState<Role | null>(null);
 
-	const params = new URLSearchParams(initData);
-	const userData = JSON.parse(params.get('user') || '{}');
-	const userId = userData.id as number;
-
 	useEffect(() => {
 		tg.ready();
 		tg.expand();
@@ -40,7 +36,7 @@ function App() {
 				{user?.username}
 				{user?.first_name}
 			</div>
-			<div>{userId}</div>
+			<div>{initData}</div>
 		</div>
 	);
 }
