@@ -12,9 +12,13 @@ function App() {
 		tg.close();
 	};
 
+	const ADMIN_ID = 6842203850;
+	const user = tg.initDataUnsafe.user;
+	const isAdmin = user?.id === ADMIN_ID;
+
 	return (
 		<div style={{ padding: 20, fontFamily: 'sans-serif' }}>
-			<h1>Вы — обычный пользователь</h1>
+			<h1>Вы — {isAdmin ? 'администратор' : 'обычный пользователь'}</h1>
 			<button onClick={onClose}>Закрыть</button>
 		</div>
 	);
