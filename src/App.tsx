@@ -12,7 +12,7 @@ function App() {
 		tg.expand();
 	}, []);
 
-	const API_URL = 'http://localhost:7001/api/get-role';
+	const API_URL = 'https://telegram-bot-test-server.onrender.com';
 
 	// Отправляем его на бэкенд
 	fetch(API_URL, {
