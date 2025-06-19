@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import { useTelegram } from './hooks/useTelegram';
 
 type Role = 'admin' | 'user';
+type Data = {
+	id: number;
+	telegramId: string;
+	role: Role;
+};
 
 function App() {
 	const { tg, initData, user } = useTelegram();
@@ -14,6 +19,12 @@ function App() {
 
 	const API_URL = 'https://telegram-bot-test-server.onrender.com/api/get-role';
 
+	// res.json({
+	// 	id: userInDb?.id,
+	// 	telegramId: userInDb?.telegramId,
+	// 	role: userInDb?.role,
+	// });
+
 	// Отправляем его на бэкенд
 	fetch(API_URL, {
 		method: 'POST',
@@ -21,8 +32,9 @@ function App() {
 		body: JSON.stringify({ initData }),
 	})
 		.then((res) => res.json())
-		.then((data: { role: Role }) => {
+		.then((data: Data) => {
 			setRole(data.role);
+			console.log(data);
 		})
 		.catch(console.error);
 
