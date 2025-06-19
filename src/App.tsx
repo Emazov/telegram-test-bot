@@ -4,7 +4,7 @@ import { useTelegram } from './hooks/useTelegram';
 type Role = 'ADMIN' | 'USER';
 
 function App() {
-	const { tg, initData } = useTelegram();
+	const { tg, user } = useTelegram();
 	const [role, setRole] = useState<Role | null>(null);
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ function App() {
 	fetch(API_URL, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ initData }),
+		body: JSON.stringify({ userId: user?.id }),
 	})
 		.then((res) => res.json())
 		.then((data: { role: Role }) => {
