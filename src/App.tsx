@@ -32,11 +32,10 @@ function App() {
 				Вы — {role === 'admin' ? 'администратор' : 'обычный пользователь'}
 			</h1>
 			<div>
-				{user?.id}
-				{user?.username}
-				{user?.first_name}
+				<p>ID: {user?.id}</p>
+				<p>Username: {user?.username}</p>
+				<p>First Name: {user?.first_name}</p>
 			</div>
-			<div>{initData}</div>
 		</div>
 	);
 }
