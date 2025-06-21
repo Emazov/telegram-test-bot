@@ -13,6 +13,8 @@ function App() {
 		tg.ready();
 		tg.expand();
 
+		console.log('Init Data:', initDataRaw);
+
 		fetch(API_URL, {
 			method: 'POST',
 			headers: {
