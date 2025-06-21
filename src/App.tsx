@@ -6,8 +6,8 @@ type Role = 'admin' | 'user';
 
 function App() {
 	const { tg, initData, user } = useTelegram();
-	const initDataRaw = retrieveLaunchParams();
-	
+	const { initDataRaw } = retrieveLaunchParams();
+
 	const [role, setRole] = useState<Role | null>(null);
 
 	const API_URL = 'http://localhost:7001/api/auth';
