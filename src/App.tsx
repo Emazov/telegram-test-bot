@@ -1,23 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useTelegram } from './hooks/useTelegram';
-import { retrieveLaunchParams } from '@telegram-apps/sdk';
 
 type Role = 'admin' | 'user';
 
 function App() {
-	const { tg, initData, user } = useTelegram();
-	const { initDataRaw } = retrieveLaunchParams();
+	const { tg, initData } = useTelegram();
 
 	const [role, setRole] = useState<Role | null>(null);
+	const [user, setUser] = useState<any>(null);
 
 	const API_URL = 'http://localhost:7001/api/auth';
 
 	useEffect(() => {
 		tg.ready();
 		tg.expand();
-
-		console.log('Init Data Raw:', initDataRaw);
-		console.log('Init Data:', initData);
 
 		fetch(API_URL, {
 			method: 'POST',
@@ -35,6 +31,7 @@ function App() {
 			})
 			.then((data) => {
 				setRole(data.role);
+				setUser(data.user);
 				console.log('Авторизация успешна', data);
 			})
 			.catch(console.error);
