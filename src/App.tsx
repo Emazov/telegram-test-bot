@@ -23,7 +23,7 @@ function App() {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `tma ${initDataRaw}`,
+				Authorization: `tma ${initData}`,
 			},
 		})
 			.then(async (res) => {
