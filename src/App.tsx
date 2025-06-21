@@ -4,7 +4,7 @@ import { useTelegram } from './hooks/useTelegram';
 type Role = 'admin' | 'user';
 
 function App() {
-	const { tg, initDataRaw, user } = useTelegram();
+	const { tg, initDataRaw, initData, user } = useTelegram();
 	const [role, setRole] = useState<Role | null>(null);
 
 	const API_URL = 'http://localhost:7001/api/auth';
@@ -13,7 +13,8 @@ function App() {
 		tg.ready();
 		tg.expand();
 
-		console.log('Init Data:', initDataRaw);
+		console.log('Init Data Raw:', initDataRaw);
+		console.log('Init Data:', initData);
 
 		fetch(API_URL, {
 			method: 'POST',
