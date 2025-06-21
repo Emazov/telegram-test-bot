@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useTelegram } from './hooks/useTelegram';
-import { retrieveLaunchParams } from '@telegram-apps/sdk';
 
 type Role = 'admin' | 'user';
 
 function App() {
-	const { tg, user } = useTelegram();
-	const { initDataRaw } = retrieveLaunchParams();
+	const { tg, initDataRaw, user } = useTelegram();
 	const [role, setRole] = useState<Role | null>(null);
 
 	const API_URL = 'http://localhost:7001/api/auth';

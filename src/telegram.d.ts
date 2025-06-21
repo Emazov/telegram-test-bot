@@ -14,6 +14,7 @@ interface TelegramWebApp {
 			auth_date: string;
 			hash: string;
 		};
+		initDataRaw: string;
 		colorScheme: 'light' | 'dark';
 		viewportHeight: number;
 		viewportStableHeight: number;
