@@ -1,37 +1,40 @@
 import { useEffect, useState } from 'react';
 import { useTelegram } from './hooks/useTelegram';
+import { retrieveLaunchParams } from '@telegram-apps/sdk';
 
 type Role = 'admin' | 'user';
-type Data = {
-	id: number;
-	telegramId: string;
-	role: Role;
-};
 
 function App() {
-	const { tg, initData, user } = useTelegram();
+	const { tg, user } = useTelegram();
+	const { initDataRaw } = retrieveLaunchParams();
 	const [role, setRole] = useState<Role | null>(null);
+
+	const API_URL = 'http://localhost:7001/api/auth';
 
 	useEffect(() => {
 		tg.ready();
 		tg.expand();
-	}, []);
 
-	// const API_URL = 'https://telegram-bot-test-server.onrender.com/api/get-role';
-	const API_URL = 'http://localhost:7001/api/get-role';
-
-	// Отправляем его на бэкенд
-	fetch(API_URL, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ initData }),
-	})
-		.then((res) => res.json())
-		.then((data: Data) => {
-			setRole(data.role);
-			console.log(data);
+		fetch(API_URL, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `tma ${initDataRaw}`,
+			},
 		})
-		.catch(console.error);
+			.then(async (res) => {
+				if (!res.ok) {
+					const err = await res.json();
+					throw new Error(err.error || 'Неизвестная ошибка');
+				}
+				return res.json();
+			})
+			.then((data) => {
+				setRole(data.role);
+				console.log('Авторизация успешна', data);
+			})
+			.catch(console.error);
+	}, []);
 
 	return (
 		<div style={{ padding: 20, fontFamily: 'sans-serif' }}>
